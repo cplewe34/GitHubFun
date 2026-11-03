@@ -1,5 +1,11 @@
+# main.py
+# This file runs the card game War.
+# It uses the deck class (from card.py) and the player class (from player.py).
+
 from card import deck
 from player import player
+
+
 
 def play_round(player1, player2):
     #Play one round (including any wars). Returns (winner, was_war)
@@ -24,12 +30,15 @@ def play_round(player1, player2):
             player1.collect_cards(pot)
             return player1, True
 
+        # Each player draws a card for the war.
         card1 = player1.draw_card()
         card2 = player2.draw_card()
         print(f"{player1} drew the {card1}.")
         print(f"{player2} drew the {card2}.")
+        # Adds new cards to the pot for the war.
         pot.extend([card1, card2])
 
+    # Determine the winner of the round and give them all the cards in the pot.
     winner = player1 if card1 > card2 else player2
     winner.collect_cards(pot)
     return winner, len(pot) > 2
@@ -45,9 +54,11 @@ def main():
     player1 = player("Player 1", deck1.deal_all())
     player2 = player("Player 2", deck2.deal_all())
 
+    # Play rounds until one player has all the cards.
     auto = False
     round_number = 0
 
+    # Play rounds until one player has all the cards.
     while player1.has_cards() and player2.has_cards():
         round_number += 1
         winner, was_war = play_round(player1, player2)
@@ -59,6 +70,10 @@ def main():
         if not auto:
             input("Press Enter to continue to the next round...")
 
+    # Determine the overall winner and print the result.
     overall_winner = player1 if player1.has_cards() else player2
     print(f"{overall_winner} wins the game!")
-        
+
+# Run the main function if this file is executed directly.
+main()
+
