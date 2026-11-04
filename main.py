@@ -2,7 +2,7 @@
 # This file runs the card game War.
 # It uses the deck class (from card.py) and the player class (from player.py).
 
-from card import deck
+from card import Deck
 from player import player
 
 
@@ -47,8 +47,8 @@ def main():
     print("This is War! Welcome, soldier.")
 
     # Two separate decks, each shuffled, one per player.
-    deck1 = deck()
-    deck2 = deck()
+    deck1 = Deck()
+    deck2 = Deck()
     deck1.shuffle()
     deck2.shuffle()
     player1 = player("Player 1", deck1.deal_all())
@@ -76,4 +76,3 @@ def main():
 
 # Run the main function if this file is executed directly.
 main()
-

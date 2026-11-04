@@ -3,7 +3,7 @@
 # A player has a name and a pile of cards (their "hand").
 # Most of the work is passed along to the deck class from card.py.
  
-from card import deck
+from card import Deck
 
 # A player in the game War.
 class player:
