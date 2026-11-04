@@ -2,9 +2,9 @@
 # This file runs the card game War.
 # It uses the deck class (from card.py) and the player class (from player.py).
 
+import random
 from card import Deck
 from player import player
-
 
 
 def play_round(player1, player2):
@@ -17,7 +17,7 @@ def play_round(player1, player2):
     pot = [card1, card2]  # every card played this round
 
     # Keep going to war until the cards are different.
-    while card1 == card2:
+    while card1.tie(card2):
         print("War!")
 
         # A player with no cards left cannot fight the war and loses it.
@@ -39,7 +39,8 @@ def play_round(player1, player2):
         pot.extend([card1, card2])
 
     # Determine the winner of the round and give them all the cards in the pot.
-    winner = player1 if card1 > card2 else player2
+    winner = player1 if card1.beats(card2) else player2
+    random.shuffle(pot)  # Shuffle the pot before giving it to the winner.
     winner.collect_cards(pot)
     return winner, len(pot) > 2
 
@@ -49,18 +50,22 @@ def main():
     # Two separate decks, each shuffled, one per player.
     deck1 = Deck()
     deck2 = Deck()
+    deck1.build() 
+    deck2.build() 
     deck1.shuffle()
     deck2.shuffle()
-    player1 = player("Player 1", deck1.deal_all())
-    player2 = player("Player 2", deck2.deal_all())
+    player1 = player("Player 1", deck1)
+    player2 = player("Player 2", deck2)
 
     # Play rounds until one player has all the cards.
-    auto = False
+    choice = input("Type 'a' to auto-play, or press Enter to play round by round: ")
+    auto = choice.strip().lower() == "a"
     round_number = 0
 
     # Play rounds until one player has all the cards.
     while player1.has_cards() and player2.has_cards():
         round_number += 1
+        print(f"\n--- Round {round_number} ---")
         winner, was_war = play_round(player1, player2)
         print(f"{winner} wins the {'war' if was_war else 'round'}!")
 
@@ -72,7 +77,8 @@ def main():
 
     # Determine the overall winner and print the result.
     overall_winner = player1 if player1.has_cards() else player2
-    print(f"{overall_winner} wins the game!")
+    print(f"\n{overall_winner} wins the game after {round_number} rounds!")
 
 # Run the main function if this file is executed directly.
-main()
+if __name__ == "__main__":
+    main()
