@@ -16,7 +16,6 @@ class Card:
     def __str__(self):
         return(f"{self.rank} of {self.suit}")
 
-#check with others about tie
     def beats(self, other):
         if self.value > other.value:
             return True
