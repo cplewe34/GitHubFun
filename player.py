@@ -13,15 +13,16 @@ class player:
 
     def draw_card(self):
         # Draws a card from the player's hand. Returns the card drawn.
-        return self.hand.draw_card()
+        return self.hand.deal()
     
-    def collect_cards(self, deck):
+    def collect_cards(self, cards):
         # Collects cards from a deck and adds them to the player's hand.
-        self.hand.collect_cards(deck)
+        for card in cards:
+            self.hand.add_card(card)
 
     def count_cards(self):
         # Returns the number of cards in the player's hand.
-        return self.hand.count_cards()
+        return len(self.hand)
 
     def has_cards(self):
         # Returns True if the player has cards left in their hand, False otherwise.
