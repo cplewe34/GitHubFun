@@ -3,13 +3,15 @@
 # we used a placeholder for a "shuffle" function, and a "deal_all" function 
 import random 
 
+suit = ["Hearts", "Diamonds", "Spades", "Clubs"]
+rank_values = { "2": 2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "Jack":11, "Queen":12, "King":13, "Ace":14 }   
 
 class Card:
 
-    def __init__(self, suit, rank, value):
+    def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
-        self.value = value
+        self.value = rank_values[rank]
 
     def __str__(self):
         return(f"{self.rank} of {self.suit}")
@@ -30,20 +32,18 @@ class Card:
 
 
 class Deck:
-    #rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
-    suit = ["Hearts", "Diamonds", "Spades", "Clubs"]
-    rank = { "2": 2, "3":3, "4":4, "5":5, "6":6, "7":7, "8":8, "9":9, "10":10, "Jack":11, "Queen":12, "King":13, "Ace":14 }     
+    #rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]  
 
     def __init__(self):
         self.card_list = []
 
     def build(self):
-        for rank in self.rank:
-            for suit in self.suit:
-                self.card_list.append(Card(self.rank, self.suit))
+        for rank in rank_values:
+            for i in suit:
+                self.card_list.append(Card(rank,i))
 
     def shuffle(self):
-        random.self.card_list
+        random.shuffle(self.card_list)
 
     def deal(self):
         
