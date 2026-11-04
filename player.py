@@ -6,7 +6,7 @@
 from card import Deck
 
 # A player in the game War.
-class player:
+class Player:
     def __init__(self, name, deck):
         self.name = name
         self.hand = deck
