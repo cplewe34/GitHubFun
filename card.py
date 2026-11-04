@@ -40,10 +40,20 @@ class Deck:
     def build(self):
         for rank in rank_values:
             for i in suit:
-                self.card_list.append(Card(rank,i))
+                self.card_list.append(Card(i,rank))
 
     def shuffle(self):
         random.shuffle(self.card_list)
 
     def deal(self):
-        
+        if len(self.card_list) == 0:
+            return None
+        else:
+            return self.card_list.pop(0)
+
+    def add_card(self, card_in):
+        self.card_list.append(card_in)
+
+
+
+
