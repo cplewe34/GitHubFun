@@ -54,6 +54,17 @@ class Deck:
     def add_card(self, card_in):
         self.card_list.append(card_in)
 
+    def __len__(self):
+        return len(self.card_list)
+    
+    def is_empty(self):
+        if  len(self.card_list) == 0:
+            return True
+        else:
+            return False
+
+
+
 
 
 
