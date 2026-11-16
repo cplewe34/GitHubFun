@@ -4,7 +4,7 @@
 
 import random
 from card import Deck
-from player import player
+from player import Player
 
 
 def play_round(player1, player2):
@@ -54,8 +54,8 @@ def main():
     deck2.build() 
     deck1.shuffle()
     deck2.shuffle()
-    player1 = player("Player 1", deck1)
-    player2 = player("Player 2", deck2)
+    player1 = Player("Player 1", deck1)
+    player2 = Player("Player 2", deck2)
 
     # Play rounds until one player has all the cards.
     choice = input("Type 'a' to auto-play, or press Enter to play round by round: ")
